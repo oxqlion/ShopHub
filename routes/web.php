@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +37,8 @@ Route::post('/cart/{product}', [CartController::class, 'addToCart'])->name('addT
 Route::get('/cart', [CartController::class, 'showCart'])->name('showCart');
 Route::patch('/cart/{cart}', [CartController::class, 'updateCart'])->name('updateCart');
 Route::delete('/cart/{cart}', [CartController::class, 'deleteCart'])->name('deleteCart');
+Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::get('/orders', [OrderController::class, 'indexOrder'])->name('indexOrder');
+Route::get('/orders/{order}', [OrderController::class, 'showOrder'])->name('showOrder');
+Route::post('/order/{order}/pay', [OrderController::class, 'submitPaymentReceipt'])->name('submitPaymentReceipt');
+Route::post('/order/{order}/confirm', [OrderController::class, 'confirmPayment'])->name('confirmPayment');
