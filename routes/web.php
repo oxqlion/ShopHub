@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,5 @@ Route::get('/orders', [OrderController::class, 'indexOrder'])->name('indexOrder'
 Route::get('/orders/{order}', [OrderController::class, 'showOrder'])->name('showOrder');
 Route::post('/order/{order}/pay', [OrderController::class, 'submitPaymentReceipt'])->name('submitPaymentReceipt');
 Route::post('/order/{order}/confirm', [OrderController::class, 'confirmPayment'])->name('confirmPayment');
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('showProfile');
+Route::post('profle', [ProfileController::class, 'editProfile'])->name('editProfile');
