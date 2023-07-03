@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Products') }}</div>    
+                    <div class="card-header">{{ __('Products') }}</div>
 
                     <div class="card-group m-auto">
                         @foreach ($products as $product)
@@ -17,17 +17,21 @@
                                         @csrf
                                         <button type="submit" class="btn btn-primary">Show Detail</button>
                                     </form>
-                                    <form action="{{ route('deleteProduct', $product) }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger mt-2">Delete Product</button>
-                                    </form>
+                                    @if (Auth::user())
+                                        @if (Auth::user()->is_admin)
+                                            <form action="{{ route('deleteProduct', $product) }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger mt-2">Delete Product</button>
+                                            </form>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                </div>    
-            </div>    
-        </div>    
-    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

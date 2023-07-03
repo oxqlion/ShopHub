@@ -24,10 +24,12 @@
                                             <div class="d-flex flex-row justify-content-around">
                                                 <a href="{{ url('storage/' . $order->payment_receipt) }}"
                                                     class="btn btn-primary">Show Payment Receipt</a>
-                                                <form action="{{ route('confirmPayment', $order) }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-success">Confirm</button>
-                                                </form>
+                                                @if (Auth::user()->is_admin)
+                                                    <form action="{{ route('confirmPayment', $order) }}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-success">Confirm</button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         @endif
                                     @endif

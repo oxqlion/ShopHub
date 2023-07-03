@@ -42,17 +42,33 @@ class OrderController extends Controller
         }
 
         return Redirect::back();
+        // return Redirect::route('checkout');
     }
 
     public function indexOrder()
     {
-        $orders = Order::all();
+        $isAdmin = Auth::user()->is_admin;
+        if ($isAdmin) {
+            $orders = Order::all();
+        } else {
+            $orders = Order::where('user_id', Auth::user()->id)->get();
+        }
+        
         return view('indexOrder', compact('orders'));
     }
 
     public function showOrder(Order $order)
     {
-        return view('showOrder', compact('order'));
+        $user = Auth::user();
+        $isAdmin = $user->is_admin;
+
+        if ($isAdmin || $order->user_id == $user->id) {
+            return view('showOrder', compact('order'));
+        }
+
+        return Redirect::route('indexOrder');
+        
+
     }
 
     public function submitPaymentReceipt(Order $order, Request $req)

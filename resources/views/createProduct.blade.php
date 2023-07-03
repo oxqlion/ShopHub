@@ -33,6 +33,7 @@
                                 <label for="name">Image</label>
                                 <input type="file" name="image" class="form-control">
                             </div>
+                            <button type="submit" class="btn btn-primary mt-3">Add Product</button>
                         </form>
                     </div>
                 </div>
