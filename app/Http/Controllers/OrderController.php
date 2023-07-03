@@ -65,10 +65,7 @@ class OrderController extends Controller
         if ($isAdmin || $order->user_id == $user->id) {
             return view('showOrder', compact('order'));
         }
-
         return Redirect::route('indexOrder');
-        
-
     }
 
     public function submitPaymentReceipt(Order $order, Request $req)
